@@ -1,0 +1,38 @@
+premises
+premiseno	floor	1/2bhk	
+
+
+member
+memid	name	address	Contact	
+
+
+memlogin
+id	memid	password	
+
+
+rentlogin
+id	memid	password
+
+
+renter
+renid	name	address	contact	
+
+
+link mem&prem
+id	premiseno	memid
+
+
+link rent&prem
+id	premiseno	rentid
+
+
+duesmem
+id	memid	pendingamount	period	lastpaidamount	lastdate
+
+
+duesren
+id	renid	pendingamount	period	lastpaidamount	lastdate
+
+
+
+
