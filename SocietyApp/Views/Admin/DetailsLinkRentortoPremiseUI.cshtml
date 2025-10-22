@@ -1,0 +1,54 @@
+﻿@model SocietyApp.Models.RentorPremiseDetail
+
+@{
+    ViewBag.Title = "DetailsLinkRentortoPremiseUI";
+}
+
+<h2>DetailsLinkRentortoPremiseUI</h2>
+
+<div>
+    <h4>RentorPremiseDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Premis.PremiseID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Premis.PremiseID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Premis.Floor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Premis.Floor)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Premis.Type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Premis.Type)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Rentor.RentorID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rentor.RentorID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Rentor.RentorID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Rentor.RentorID)
+        </dd>
+
+    </dl>
+</div>
+<p>
+   
+    @Html.ActionLink("Back to List", "LinkRentortoPremiseUI")
+</p>

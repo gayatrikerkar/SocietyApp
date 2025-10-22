@@ -1,0 +1,42 @@
+﻿@model IEnumerable<SocietyApp.Models.RentorPremiseDetail>
+
+@{
+    ViewBag.Title = "LinkRentortoPremiseUI";
+}
+
+<h2>LinkRentortoPremiseUI</h2>
+@Html.Raw(TempData["DeleteMessage"])
+@Html.Raw(TempData["InsertMessage"])
+<p>
+    @Html.ActionLink("Create New", "LinkRentortoPremise")
+    @Html.ActionLink("Back to the home page", "Index")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Premis.PremiseID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Rentor.RentorID)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Premis.PremiseID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rentor.RentorID)
+            </td>
+            <td>
+
+                @Html.ActionLink("Details", "DetailsLinkRentortoPremiseUI", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "DeleteLinkRentortoPremiseUI", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<SocietyApp.Models.MemberPremiseDetail>
+
+@{
+    ViewBag.Title = "LinkMembertoPremiseUI";
+}
+
+<h2>LinkMembertoPremiseUI</h2>
+@Html.Raw(TempData["DeleteMessage"])
+@Html.Raw(TempData["InsertMessage"])
+<p>
+    @Html.ActionLink("Create New", "LinkMembertoPremise")
+    @Html.ActionLink("Back to the home page", "Index")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Member.MemID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Premis.PremiseID)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Member.MemID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Premis.PremiseID)
+            </td>
+            <td>
+
+                @Html.ActionLink("Details", "DetailsMembertoPremiseUI", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "DeleteMembertoPremiseUI", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

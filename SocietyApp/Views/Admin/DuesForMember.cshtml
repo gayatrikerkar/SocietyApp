@@ -1,0 +1,71 @@
+﻿@model IEnumerable<SocietyApp.Models.MemDue>
+
+@{
+    ViewBag.Title = "DuesForMember";
+}
+
+<h2>DuesForMember</h2>
+@Html.Raw(TempData["InsertMessage"])
+
+@Html.Raw(TempData["UpdateMessage"])
+@Html.Raw(TempData["isDeleted"])
+
+@Html.Raw(TempData["DeleteMessage"])
+
+<p>
+    @Html.ActionLink("Create New", "CreateDues")
+    @Html.ActionLink("Back to the home page", "Index")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MemID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PendingAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Period)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastAmountPaid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Member.Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MemID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PendingAmount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Period)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastAmountPaid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Member.Name)
+            </td>
+            <td>
+
+
+                @Html.ActionLink("Delete", "DeleteDues", new { id = item.ID })
+            </td>
+        </tr>
+    }
+
+</table>

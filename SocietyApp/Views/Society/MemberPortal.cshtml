@@ -1,0 +1,8 @@
+﻿
+@{
+    ViewBag.Title = "MemberPortal";
+}
+
+<h2>MemberPortal</h2>
+<h2>Welcome @Session["username"]</h2>
+@Html.ActionLink("Logout", "MemberLogout", "Society")

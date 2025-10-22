@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<h2>Welcome @Session["username"]</h2>
+@Html.Raw(TempData["isDeleted"])
+@Html.ActionLink("Logout", "AdminLogout", "Admin")
+
+@Html.ActionLink("Members", "MembersUI", "Admin")
+@Html.ActionLink("Rentor", "RentorUI", "Admin")
+
+@Html.ActionLink("Premises", "PremisesUI", "Admin")
+@Html.ActionLink("LinkMembertoPremise", "LinkMembertoPremiseUI", "Admin")
+@Html.ActionLink("LinkRentortoPremise", "LinkRentortoPremiseUI", "Admin")
+@Html.ActionLink("DuesForMember", "DuesForMember", "Admin")
+@Html.ActionLink("GetDuesForMember", "GetDuesForMember", "Admin")

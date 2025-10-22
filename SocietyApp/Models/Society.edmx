@@ -1,0 +1,493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SocietyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="MemberPremiseDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemID" Type="varchar" MaxLength="250" />
+          <Property Name="PremiseID" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="MemID" />
+          </Key>
+          <Property Name="MemID" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="250" />
+          <Property Name="Address" Type="varchar" MaxLength="250" />
+          <Property Name="Contact" Type="varchar" MaxLength="250" />
+          <Property Name="Password" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="MemDues">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MemID" Type="varchar" MaxLength="250" />
+          <Property Name="PendingAmount" Type="float" />
+          <Property Name="Period" Type="varchar" MaxLength="250" />
+          <Property Name="LastDate" Type="date" />
+          <Property Name="LastAmountPaid" Type="float" />
+        </EntityType>
+        <EntityType Name="Premises">
+          <Key>
+            <PropertyRef Name="PremiseID" />
+          </Key>
+          <Property Name="PremiseID" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Floor" Type="varchar" MaxLength="250" />
+          <Property Name="Type" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Rentor">
+          <Key>
+            <PropertyRef Name="RentorID" />
+          </Key>
+          <Property Name="RentorID" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="250" />
+          <Property Name="Address" Type="varchar" MaxLength="250" />
+          <Property Name="Contact" Type="varchar" MaxLength="250" />
+          <Property Name="Password" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="RentorDues">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RentID" Type="varchar" MaxLength="250" />
+          <Property Name="PendingAmount" Type="float" />
+          <Property Name="Period" Type="varchar" MaxLength="250" />
+          <Property Name="LastDate" Type="date" />
+          <Property Name="LastAmountPaid" Type="float" />
+        </EntityType>
+        <EntityType Name="RentorPremiseDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RentorID" Type="varchar" MaxLength="250" />
+          <Property Name="PremiseID" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <Association Name="FK_MemberPremiseDetails_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="0..1" />
+          <End Role="MemberPremiseDetails" Type="Self.MemberPremiseDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemID" />
+            </Principal>
+            <Dependent Role="MemberPremiseDetails">
+              <PropertyRef Name="MemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberPremiseDetails_Premises">
+          <End Role="Premises" Type="Self.Premises" Multiplicity="0..1" />
+          <End Role="MemberPremiseDetails" Type="Self.MemberPremiseDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Premises">
+              <PropertyRef Name="PremiseID" />
+            </Principal>
+            <Dependent Role="MemberPremiseDetails">
+              <PropertyRef Name="PremiseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemDues_Members">
+          <End Role="Members" Type="Self.Members" Multiplicity="0..1" />
+          <End Role="MemDues" Type="Self.MemDues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemID" />
+            </Principal>
+            <Dependent Role="MemDues">
+              <PropertyRef Name="MemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RentorDues_Rentor">
+          <End Role="Rentor" Type="Self.Rentor" Multiplicity="0..1" />
+          <End Role="RentorDues" Type="Self.RentorDues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rentor">
+              <PropertyRef Name="RentorID" />
+            </Principal>
+            <Dependent Role="RentorDues">
+              <PropertyRef Name="RentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RentorPremiseDetails_Premises">
+          <End Role="Premises" Type="Self.Premises" Multiplicity="0..1" />
+          <End Role="RentorPremiseDetails" Type="Self.RentorPremiseDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Premises">
+              <PropertyRef Name="PremiseID" />
+            </Principal>
+            <Dependent Role="RentorPremiseDetails">
+              <PropertyRef Name="PremiseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RentorPremiseDetails_Rentor">
+          <End Role="Rentor" Type="Self.Rentor" Multiplicity="0..1" />
+          <End Role="RentorPremiseDetails" Type="Self.RentorPremiseDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rentor">
+              <PropertyRef Name="RentorID" />
+            </Principal>
+            <Dependent Role="RentorPremiseDetails">
+              <PropertyRef Name="RentorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SocietyModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MemberPremiseDetails" EntityType="Self.MemberPremiseDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Members" EntityType="Self.Members" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MemDues" EntityType="Self.MemDues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Premises" EntityType="Self.Premises" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rentor" EntityType="Self.Rentor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RentorDues" EntityType="Self.RentorDues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RentorPremiseDetails" EntityType="Self.RentorPremiseDetails" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_MemberPremiseDetails_Members" Association="Self.FK_MemberPremiseDetails_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="MemberPremiseDetails" EntitySet="MemberPremiseDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberPremiseDetails_Premises" Association="Self.FK_MemberPremiseDetails_Premises">
+            <End Role="Premises" EntitySet="Premises" />
+            <End Role="MemberPremiseDetails" EntitySet="MemberPremiseDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemDues_Members" Association="Self.FK_MemDues_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="MemDues" EntitySet="MemDues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RentorDues_Rentor" Association="Self.FK_RentorDues_Rentor">
+            <End Role="Rentor" EntitySet="Rentor" />
+            <End Role="RentorDues" EntitySet="RentorDues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RentorPremiseDetails_Premises" Association="Self.FK_RentorPremiseDetails_Premises">
+            <End Role="Premises" EntitySet="Premises" />
+            <End Role="RentorPremiseDetails" EntitySet="RentorPremiseDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RentorPremiseDetails_Rentor" Association="Self.FK_RentorPremiseDetails_Rentor">
+            <End Role="Rentor" EntitySet="Rentor" />
+            <End Role="RentorPremiseDetails" EntitySet="RentorPremiseDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SocietyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="MemberPremiseDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PremiseID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_MemberPremiseDetails_Members" FromRole="MemberPremiseDetails" ToRole="Members" />
+          <NavigationProperty Name="Premis" Relationship="Self.FK_MemberPremiseDetails_Premises" FromRole="MemberPremiseDetails" ToRole="Premises" />
+        </EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="MemID" />
+          </Key>
+          <Property Name="MemID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MemberPremiseDetails" Relationship="Self.FK_MemberPremiseDetails_Members" FromRole="Members" ToRole="MemberPremiseDetails" />
+          <NavigationProperty Name="MemDues" Relationship="Self.FK_MemDues_Members" FromRole="Members" ToRole="MemDues" />
+        </EntityType>
+        <EntityType Name="MemDue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MemID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PendingAmount" Type="Double" />
+          <Property Name="Period" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="LastDate" Type="DateTime" Precision="0" />
+          <Property Name="LastAmountPaid" Type="Double" />
+          <NavigationProperty Name="Member" Relationship="Self.FK_MemDues_Members" FromRole="MemDues" ToRole="Members" />
+        </EntityType>
+        <EntityType Name="Premis">
+          <Key>
+            <PropertyRef Name="PremiseID" />
+          </Key>
+          <Property Name="PremiseID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Floor" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="MemberPremiseDetails" Relationship="Self.FK_MemberPremiseDetails_Premises" FromRole="Premises" ToRole="MemberPremiseDetails" />
+          <NavigationProperty Name="RentorPremiseDetails" Relationship="Self.FK_RentorPremiseDetails_Premises" FromRole="Premises" ToRole="RentorPremiseDetails" />
+        </EntityType>
+        <EntityType Name="Rentor">
+          <Key>
+            <PropertyRef Name="RentorID" />
+          </Key>
+          <Property Name="RentorID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RentorDues" Relationship="Self.FK_RentorDues_Rentor" FromRole="Rentor" ToRole="RentorDues" />
+          <NavigationProperty Name="RentorPremiseDetails" Relationship="Self.FK_RentorPremiseDetails_Rentor" FromRole="Rentor" ToRole="RentorPremiseDetails" />
+        </EntityType>
+        <EntityType Name="RentorDue">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RentID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PendingAmount" Type="Double" />
+          <Property Name="Period" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="LastDate" Type="DateTime" Precision="0" />
+          <Property Name="LastAmountPaid" Type="Double" />
+          <NavigationProperty Name="Rentor" Relationship="Self.FK_RentorDues_Rentor" FromRole="RentorDues" ToRole="Rentor" />
+        </EntityType>
+        <EntityType Name="RentorPremiseDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RentorID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PremiseID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Premis" Relationship="Self.FK_RentorPremiseDetails_Premises" FromRole="RentorPremiseDetails" ToRole="Premises" />
+          <NavigationProperty Name="Rentor" Relationship="Self.FK_RentorPremiseDetails_Rentor" FromRole="RentorPremiseDetails" ToRole="Rentor" />
+        </EntityType>
+        <Association Name="FK_MemberPremiseDetails_Members">
+          <End Role="Members" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="MemberPremiseDetails" Type="Self.MemberPremiseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemID" />
+            </Principal>
+            <Dependent Role="MemberPremiseDetails">
+              <PropertyRef Name="MemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberPremiseDetails_Premises">
+          <End Role="Premises" Type="Self.Premis" Multiplicity="0..1" />
+          <End Role="MemberPremiseDetails" Type="Self.MemberPremiseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Premises">
+              <PropertyRef Name="PremiseID" />
+            </Principal>
+            <Dependent Role="MemberPremiseDetails">
+              <PropertyRef Name="PremiseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemDues_Members">
+          <End Role="Members" Type="Self.Member" Multiplicity="0..1" />
+          <End Role="MemDues" Type="Self.MemDue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemID" />
+            </Principal>
+            <Dependent Role="MemDues">
+              <PropertyRef Name="MemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RentorPremiseDetails_Premises">
+          <End Role="Premises" Type="Self.Premis" Multiplicity="0..1" />
+          <End Role="RentorPremiseDetails" Type="Self.RentorPremiseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Premises">
+              <PropertyRef Name="PremiseID" />
+            </Principal>
+            <Dependent Role="RentorPremiseDetails">
+              <PropertyRef Name="PremiseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RentorDues_Rentor">
+          <End Role="Rentor" Type="Self.Rentor" Multiplicity="0..1" />
+          <End Role="RentorDues" Type="Self.RentorDue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rentor">
+              <PropertyRef Name="RentorID" />
+            </Principal>
+            <Dependent Role="RentorDues">
+              <PropertyRef Name="RentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RentorPremiseDetails_Rentor">
+          <End Role="Rentor" Type="Self.Rentor" Multiplicity="0..1" />
+          <End Role="RentorPremiseDetails" Type="Self.RentorPremiseDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rentor">
+              <PropertyRef Name="RentorID" />
+            </Principal>
+            <Dependent Role="RentorPremiseDetails">
+              <PropertyRef Name="RentorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SocietyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="MemberPremiseDetails" EntityType="Self.MemberPremiseDetail" />
+          <EntitySet Name="Members" EntityType="Self.Member" />
+          <EntitySet Name="MemDues" EntityType="Self.MemDue" />
+          <EntitySet Name="Premises" EntityType="Self.Premis" />
+          <EntitySet Name="Rentors" EntityType="Self.Rentor" />
+          <EntitySet Name="RentorDues" EntityType="Self.RentorDue" />
+          <EntitySet Name="RentorPremiseDetails" EntityType="Self.RentorPremiseDetail" />
+          <AssociationSet Name="FK_MemberPremiseDetails_Members" Association="Self.FK_MemberPremiseDetails_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="MemberPremiseDetails" EntitySet="MemberPremiseDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberPremiseDetails_Premises" Association="Self.FK_MemberPremiseDetails_Premises">
+            <End Role="Premises" EntitySet="Premises" />
+            <End Role="MemberPremiseDetails" EntitySet="MemberPremiseDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemDues_Members" Association="Self.FK_MemDues_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="MemDues" EntitySet="MemDues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RentorPremiseDetails_Premises" Association="Self.FK_RentorPremiseDetails_Premises">
+            <End Role="Premises" EntitySet="Premises" />
+            <End Role="RentorPremiseDetails" EntitySet="RentorPremiseDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RentorDues_Rentor" Association="Self.FK_RentorDues_Rentor">
+            <End Role="Rentor" EntitySet="Rentors" />
+            <End Role="RentorDues" EntitySet="RentorDues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RentorPremiseDetails_Rentor" Association="Self.FK_RentorPremiseDetails_Rentor">
+            <End Role="Rentor" EntitySet="Rentors" />
+            <End Role="RentorPremiseDetails" EntitySet="RentorPremiseDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SocietyModelStoreContainer" CdmEntityContainer="SocietyEntities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="SocietyModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemberPremiseDetails">
+            <EntityTypeMapping TypeName="SocietyModel.MemberPremiseDetail">
+              <MappingFragment StoreEntitySet="MemberPremiseDetails">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MemID" ColumnName="MemID" />
+                <ScalarProperty Name="PremiseID" ColumnName="PremiseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="SocietyModel.Member">
+              <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="MemID" ColumnName="MemID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MemDues">
+            <EntityTypeMapping TypeName="SocietyModel.MemDue">
+              <MappingFragment StoreEntitySet="MemDues">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="MemID" ColumnName="MemID" />
+                <ScalarProperty Name="PendingAmount" ColumnName="PendingAmount" />
+                <ScalarProperty Name="Period" ColumnName="Period" />
+                <ScalarProperty Name="LastDate" ColumnName="LastDate" />
+                <ScalarProperty Name="LastAmountPaid" ColumnName="LastAmountPaid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Premises">
+            <EntityTypeMapping TypeName="SocietyModel.Premis">
+              <MappingFragment StoreEntitySet="Premises">
+                <ScalarProperty Name="PremiseID" ColumnName="PremiseID" />
+                <ScalarProperty Name="Floor" ColumnName="Floor" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rentors">
+            <EntityTypeMapping TypeName="SocietyModel.Rentor">
+              <MappingFragment StoreEntitySet="Rentor">
+                <ScalarProperty Name="RentorID" ColumnName="RentorID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RentorDues">
+            <EntityTypeMapping TypeName="SocietyModel.RentorDue">
+              <MappingFragment StoreEntitySet="RentorDues">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RentID" ColumnName="RentID" />
+                <ScalarProperty Name="PendingAmount" ColumnName="PendingAmount" />
+                <ScalarProperty Name="Period" ColumnName="Period" />
+                <ScalarProperty Name="LastDate" ColumnName="LastDate" />
+                <ScalarProperty Name="LastAmountPaid" ColumnName="LastAmountPaid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RentorPremiseDetails">
+            <EntityTypeMapping TypeName="SocietyModel.RentorPremiseDetail">
+              <MappingFragment StoreEntitySet="RentorPremiseDetails">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RentorID" ColumnName="RentorID" />
+                <ScalarProperty Name="PremiseID" ColumnName="PremiseID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

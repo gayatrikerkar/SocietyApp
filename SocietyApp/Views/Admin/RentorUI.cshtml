@@ -1,0 +1,55 @@
+﻿@model IEnumerable<SocietyApp.Models.Rentor>
+
+@{
+    ViewBag.Title = "RentorUI";
+}
+
+<h2>RentorUI</h2>
+@Html.Raw(TempData["InsertMessage"])
+
+@Html.Raw(TempData["UpdateMessage"])
+
+
+@Html.Raw(TempData["DeleteMessage"])
+<p>
+    @Html.ActionLink("Create New", "CreateRentor")
+    @Html.ActionLink("Back to the home page", "Index")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.RentorID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr><td>
+    @Html.DisplayFor(modelItem => item.RentorID)
+</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            
+         
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditRentor", new { id = item.RentorID }) |
+                @Html.ActionLink("Details", "DetailsRentor", new { id = item.RentorID }) |
+                @Html.ActionLink("Delete", "DeleteRentor", new { id = item.RentorID })
+            </td>
+        </tr>
+    }
+
+</table>

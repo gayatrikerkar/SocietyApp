@@ -1,0 +1,47 @@
+﻿@model IEnumerable<SocietyApp.Models.Premis>
+
+@{
+    ViewBag.Title = "PremisesUI";
+}
+
+<h2>PremisesUI</h2>
+@Html.Raw(TempData["InsertMessage"])
+
+@Html.Raw(TempData["UpdateMessage"])
+
+
+@Html.Raw(TempData["DeleteMessage"])
+<p>
+    @Html.ActionLink("Create New", "CreatePremise")
+    @Html.ActionLink("Back to the home page", "Index")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PremiseID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Floor)
+        </th>
+      
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr><td>
+    @Html.DisplayFor(modelItem => item.PremiseID)
+</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Floor)
+            </td>
+            
+            <td>
+                @Html.ActionLink("Edit", "EditPremise", new { id = item.PremiseID }) |
+                @Html.ActionLink("Details", "DetailsPremise", new { id = item.PremiseID }) |
+                @Html.ActionLink("Delete", "DeletePremise", new { id = item.PremiseID })
+            </td>
+        </tr>
+    }
+
+</table>

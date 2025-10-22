@@ -1,0 +1,35 @@
+﻿@model SocietyApp.Models.Member
+@{
+    ViewBag.Title = "GetDuesForMember";
+}
+
+<h2>GetDuesForMember</h2>
+
+<div class="row">
+    <div class="col-md-3">
+        <div>
+            @using (Html.BeginForm("GetDuesForMember", "Admin", FormMethod.Post))
+            {
+                <table>
+                    <tr>
+                        Get Dues
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.MemID)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.MemID)
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="GetDues" name="GetDues" /></td>
+                        ViewBag.ErrorMessage
+                    </tr>
+                </table>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿@model SocietyApp.Models.Member
+
+@{
+    ViewBag.Title = "MemberLogin";
+}
+
+<h2>MemberLogin</h2>
+
+<div class="row">
+    <div class="col-md-3">
+        <div>
+            @using (Html.BeginForm("MemberLogin","Society",FormMethod.Post))
+            {
+                <table>
+                    <tr>
+                        Login
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.MemID)
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(model => model.MemID)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.LabelFor(model => model.Password)
+                        </td>
+                        <td>
+                            @Html.EditorFor(model => model.Password)
+                            @ViewBag.ErrorMessage
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="Login" name="Login" /></td>
+                    </tr>
+                </table>
+            }
+        </div>
+    </div>
+</div>

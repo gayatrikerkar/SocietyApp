@@ -1,0 +1,47 @@
+﻿@model SocietyApp.Models.MemberPremiseDetail
+
+@{
+    ViewBag.Title = "DetailsMembertoPremiseUI";
+}
+
+<h2>DetailsMembertoPremiseUI</h2>
+
+<div>
+    <h4>MemberPremiseDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Member.MemID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Member.MemID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Member.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Member.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Premis.PremiseID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Premis.PremiseID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Premis.Floor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Premis.Floor)
+        </dd>
+
+    </dl>
+</div>
+<p>
+   
+    @Html.ActionLink("Back to List", "LinkMembertoPremiseUI")
+</p>
